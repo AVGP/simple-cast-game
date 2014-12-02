@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no">
+  <style>
+    html, body {
+      margin: 0;
+
+      width:  100%;
+      height: 100%;
+
+      text-align: justify;
+
+      display: flex;
+      flex-direction: row;
+      flex-wrap: no-wrap;
+    }
+
+    button {
+      flex: 1 auto;
+      width: 30%;
+      height: 100vh;
+      font-size: 4em;
+    }
+  </style>
+</head>
+<body>
+  <button id="left">LEFT</button>
+  <button id="shoot">SHOOT</button>
+  <button id="right">RIGHT</button>
+
+  <script src="http://cdn.peerjs.com/0.3/peer.js"></script>
+  <script>
+    var gameID = document.location.hash.slice(1);
+    var peer = new Peer({key: '7nxxqfxzhestt9'});
+        console.log(peer);
+        conn = peer.connect(gameID);
+    conn.on('open', function() {
+      console.log("CONNECTED");
+
+      document.getElementById("left").addEventListener("click", function() {
+        conn.send("LEFT");
+      });
+
+      document.getElementById("right").addEventListener("click", function() {
+        conn.send("RIGHT");
+      });
+
+      document.getElementById("shoot").addEventListener("click", function() {
+        conn.send("SHOOT");
+      });
+
+
+    });
+
+  </script>
+</body>
+</html>
